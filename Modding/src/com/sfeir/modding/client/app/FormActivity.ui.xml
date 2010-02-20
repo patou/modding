@@ -1,0 +1,8 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:f="urn:import:com.sfeir.modding.client.component.forms">
+	<ui:style>
+		
+	</ui:style>
+	<f:LabelForm ui:field="form"></f:LabelForm>
+</ui:UiBinder>

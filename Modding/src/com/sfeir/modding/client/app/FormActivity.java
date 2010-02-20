@@ -1,0 +1,199 @@
+/**
+ * 
+ */
+package com.sfeir.modding.client.app;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
+import com.google.gwt.user.client.ui.FormPanel.SubmitHandler;
+import com.sfeir.modding.client.component.forms.LabelForm;
+import com.sfeir.modding.client.component.forms.base.LabelComponentBase;
+import com.sfeir.modding.client.component.menu.MenuBar;
+import com.sfeir.modding.client.component.menu.MenuItem;
+
+/**
+ * @author desaintsteban.p
+ * 
+ */
+public abstract class FormActivity extends Activity implements SubmitHandler {
+
+    @UiField
+    public LabelForm form;
+    private List<MenuItem> listButton = new ArrayList<MenuItem>(1);
+    
+    private static FormViewUiBinder uiBinder = GWT.create(FormViewUiBinder.class);
+    public interface FormViewUiBinder extends UiBinder<Widget, FormActivity> {}
+
+    /**
+     * 
+     */
+    protected FormActivity() {
+        setContentView(uiBinder.createAndBindUi(this));
+        onCreateForm();
+    }
+    
+    protected void onCreateForm() {
+        
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.sfeir.modding.client.app.Activity#displayData()
+     */
+    @Override
+    public void displayData() {
+        getForm().addSubmitHandler(this);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.sfeir.modding.client.app.Activity#getName()
+     */
+    @Override
+    public String getName() {
+        return "form-activity";
+    }
+
+    protected void addElement(LabelComponentBase<?, ?> element) {
+        getForm().add(element);
+    }
+
+    protected void setValues(Map<String, Object> values) {
+        getForm().setValues(values);
+    }
+
+    protected Map<String, Object> getValues() {
+        return getForm().getValues();
+    }
+
+    /**
+     * Ajoute un bouton qui envoie le formulaire
+     * 
+     * @param text
+     *            Texte du bouton
+     */
+    protected void addSubmitButton(String text) {
+        addSubmitButton(new MenuItem(text));
+    }
+
+    /**
+     * Ajoute un bouton qui envoie le formulaire
+     * 
+     * @param button
+     *            bouton à ajouter
+     */
+    protected void addSubmitButton(MenuItem button) {
+        listButton.add(button);
+        button.setCommand(new Command() {
+
+            @Override
+            public void execute() {
+                getForm().submit();
+
+            }
+        });
+    }
+
+    /**
+     * Ajoute un bouton qui remet à zéro le formulaire
+     * 
+     * @param text
+     *            Texte du bouton
+     */
+    protected void addResetButton(String text) {
+        addResetButton(new MenuItem(text));
+    }
+
+    /**
+     * Ajoute un bouton qui remet à zéro le formulaire
+     * 
+     * @param button
+     *            bouton à ajouter
+     */
+    protected void addResetButton(MenuItem button) {
+        listButton.add(button);
+        button.setCommand(new Command() {
+
+            @Override
+            public void execute() {
+                getForm().reset();
+
+            }
+        });
+    }
+
+    /**
+     * Ajoute un bouton qui valide simplement le formulaire
+     * 
+     * @param text
+     *            Texte du bouton
+     */
+    protected void addValidateButton(String text) {
+        addValidateButton(new MenuItem(text));
+    }
+
+    /**
+     * Ajoute un bouton qui valide simplement le formulaire
+     * 
+     * @param button
+     *            bouton à ajouter
+     */
+    protected void addValidateButton(MenuItem button) {
+        listButton.add(button);
+        button.setCommand(new Command() {
+
+            @Override
+            public void execute() {
+                getForm().validate();
+
+            }
+        });
+    }
+
+    /**
+     * Ajoute un bouton sans action spécifique
+     * 
+     * @param text
+     *            Texte du bouton
+     */
+    protected void addButton(String text) {
+        addValidateButton(new MenuItem(text));
+    }
+
+    /**
+     * Ajoute un bouton sans action spécifique
+     * 
+     * @param button
+     *            bouton à ajouter
+     */
+    protected void addButton(MenuItem button) {
+        listButton.add(button);
+    }
+    
+    protected void submit() {
+        getForm().submit();
+    }
+    
+    protected void validate() {
+        getForm().validate();
+    }
+
+    protected LabelForm getForm() {
+        return form;
+    }
+
+    @Override
+    public void onSubmit(SubmitEvent event) {
+        
+    }
+}

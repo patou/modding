@@ -1,0 +1,52 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+ xmlns:g="urn:import:com.google.gwt.user.client.ui">
+ <ui:style>
+  .label {
+  	line-height: 3em;
+  	float: left;
+  }
+  
+  .image {
+  	float: left;
+  }
+  
+  .listItemView {
+  	background: #093366;
+  	border: solid 2px rgba(255, 255, 255, 0.8);
+  	border-top: none;
+  	color: #FFF;
+  	font-weight: bold;
+  	height: 44px;
+  	padding-left: 2%;
+  	padding-right: 2%;
+  	text-shadow: 2px 2px 2px #000;
+  	vertical-align: middle;
+  }
+  
+  .listItemView:first-child {
+  	border-top: solid 2px rgba(255, 255, 255, 0.8);
+  	\-webkit-border-top-left-radius: 8px;
+  	\-webkit-border-top-right-radius: 8px;
+  	\-moz-border-radius-topleft: 8px;
+  	\-moz-border-radius-topright: 8px;
+  }
+  
+  .listItemView:last-child {
+  	\-webkit-border-bottom-left-radius: 8px;
+  	\-webkit-border-bottom-right-radius: 8px;
+  	\-moz-border-radius-bottomleft: 8px;
+  	\-moz-border-radius-bottomright: 8px;
+  }
+  
+  .listItemView:hover {
+  	background-color: #B3CEE6;
+  	color: #000;
+  	text-shadow: 2px -2px 2px #FFF;
+  }
+ </ui:style>
+ <g:FocusPanel ui:field="listItemView" styleName="{style.listItemView}">
+  <g:Image styleName="{style.image}" ui:field="image" />
+  <g:Label styleName="{style.label}" ui:field="label" />
+ </g:FocusPanel>
+</ui:UiBinder> 

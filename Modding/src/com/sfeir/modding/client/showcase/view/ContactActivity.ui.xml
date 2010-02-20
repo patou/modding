@@ -1,0 +1,13 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:f="urn:import:com.sfeir.modding.client.component.forms">
+	<ui:style>
+		
+	</ui:style>
+	<f:LabelForm ui:field="form">
+		<f:LabelTextBox name="name" text="Your name" mandatory="true" />
+		<f:LabelTextBox name="email" text="Your email" />
+		<f:LabelTextArea name="comment" text="Your message" />
+		<g:Button text="Envoyer" ui:field="submit" />
+	</f:LabelForm>
+</ui:UiBinder>

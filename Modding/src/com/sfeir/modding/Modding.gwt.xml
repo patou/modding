@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='modding'>
+
+  <inherits name='com.google.gwt.user.User'/>
+  <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+
+  <source path='client'/>
+  
+  <generate-with class="com.sfeir.modding.generator.ModdingGenerator">
+  	<when-type-assignable
+   		class="com.sfeir.modding.client.app.ActivityFactory" />
+ </generate-with>
+</module>

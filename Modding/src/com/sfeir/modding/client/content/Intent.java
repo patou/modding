@@ -1,8 +1,8 @@
 package com.sfeir.modding.client.content;
 
 import java.util.HashMap;
+
 import com.sfeir.modding.client.app.Activity;
-import com.sfeir.modding.client.showcase.view.HomeActivity;
 
 /**
  * This class allow to start an new activity

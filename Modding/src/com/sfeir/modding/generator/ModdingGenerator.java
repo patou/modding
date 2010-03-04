@@ -2,8 +2,6 @@ package com.sfeir.modding.generator;
 
 import java.io.PrintWriter;
 
-import mx4j.log.Logger;
-
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
@@ -52,7 +50,7 @@ private TypeOracle typeOracle;
         String simpleName = type.getSimpleSourceName() + "_Generated";
         ClassSourceFileComposerFactory composer = new ClassSourceFileComposerFactory(packageName, simpleName);
         PrintWriter printWriter = context.tryCreate(logger, composer.getCreatedPackage(), composer.getCreatedClassShortName());
-        if (printWriter == null) return null; 
+        if (printWriter == null) return composer.getCreatedClassName(); 
         composer.addImplementedInterface(typeName);
         composer.setSuperclass("java.lang.Object"); 
         SourceWriter writer = composer.createSourceWriter(context, printWriter);
@@ -67,7 +65,7 @@ private TypeOracle typeOracle;
         writer.outdent();
         writer.commit(logger);
         
-        logger.log(TreeLogger.WARN, composer.getCreatedClassName());
+        logger.log(TreeLogger.INFO, composer.getCreatedClassName());
         return composer.getCreatedClassName();
     } catch (Exception e) {
         logger.log(TreeLogger.ERROR, "Unable to generate the activity factory", e);

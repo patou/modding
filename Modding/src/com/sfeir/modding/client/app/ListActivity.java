@@ -46,6 +46,7 @@ public class ListActivity extends Activity implements ListItemClickHandler {
     public void displayData() {
         if(baseAdapter == null)
                return;
+        clear();
         for(int i=0; i<baseAdapter.size(); i++) {
             final ListItemView view = baseAdapter.getView(i);
             add(view);

@@ -16,7 +16,6 @@ import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitHandler;
 import com.sfeir.modding.client.component.forms.LabelForm;
 import com.sfeir.modding.client.component.forms.base.LabelComponentBase;
-import com.sfeir.modding.client.component.menu.MenuBar;
 import com.sfeir.modding.client.component.menu.MenuItem;
 
 /**

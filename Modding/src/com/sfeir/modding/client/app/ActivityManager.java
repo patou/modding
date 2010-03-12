@@ -15,7 +15,6 @@ import com.sfeir.modding.client.content.Intent;
 
 /**
  * Activity Manager
- * 
  *
  */
 public class ActivityManager extends Composite implements HasActivityChangeHandlers {
@@ -93,7 +92,8 @@ public class ActivityManager extends Composite implements HasActivityChangeHandl
      * Start a new Activity
      * @param intent
      */
-    public void startActivity(Intent intent) {
+    @SuppressWarnings("deprecation")
+	public void startActivity(Intent intent) {
         Activity activity = intent.getActivity();
         if (activity == null) {
             activity = factory.createActivity(intent.getAction());

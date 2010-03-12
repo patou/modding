@@ -41,7 +41,8 @@ public class Intent {
      * Use the class type for get the class name
      * @param activityClass
      */
-    public Intent(Class activityClass) {
+    @SuppressWarnings("unchecked")
+	public Intent(Class activityClass) {
         this(activityClass.getName());
     }
 
@@ -81,7 +82,7 @@ public class Intent {
     private String hash = null;
     
     /**
-     * Create an uniq hash used by the history manager
+     * Create an unique hash used by the history manager
      * @return
      */
     public String getHash() {
@@ -111,7 +112,7 @@ public class Intent {
     }
 
     /**
-     * Uniq hash code
+     * Unique hash code
      */
     @Override
     public int hashCode() {
@@ -140,9 +141,10 @@ public class Intent {
     }
 
     /**
-     * Used by the ActivityManager to set the Activity created reference
+     * Used by the ActivityManager ONLY to set the Activity created reference
      * @param activity
      */
+    @Deprecated
     public void setActivity(Activity activity) {
         this.activity = activity;
     }

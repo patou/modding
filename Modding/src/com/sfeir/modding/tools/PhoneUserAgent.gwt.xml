@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.1//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.0.1/distro-source/core/src/gwt-module.dtd">
+<module>
+
+  <!-- Browser-sensitive code should use the 'user.agent' property -->
+  <define-property name="phone.useragent" values="iphone,android,nophone"/>
+
+  <property-provider name="phone.useragent"><![CDATA[
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.indexOf("iphone") != -1) {
+        return "iphone";
+      } else if (ua.indexOf("android") != -1) {
+        return "android";
+      }
+      return "nophone";
+  ]]></property-provider>
+
+</module>

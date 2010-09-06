@@ -1,5 +1,5 @@
 function modding(){
-  var $intern_0 = '', $intern_29 = '" for "gwt:onLoadErrorFn"', $intern_27 = '" for "gwt:onPropertyErrorFn"', $intern_12 = '"><\/script>', $intern_14 = '#', $intern_53 = '.cache.html', $intern_16 = '/', $intern_47 = '1166995A27850E333CE5FE0F5D43954D', $intern_48 = '141864B892DB155FAF1711EB618AA86E', $intern_49 = '3AB8AC3EDA918321C629DCBFDC8632FE', $intern_50 = '83803021FA4E2FEAD11AF0F841BAB74A', $intern_61 = '<script defer="defer">modding.onInjectionDone(\'modding\')<\/script>', $intern_11 = '<script id="', $intern_24 = '=', $intern_15 = '?', $intern_51 = 'A9BA8058CAB095E56C9D9C8B320EB688', $intern_26 = 'Bad handler "', $intern_60 = 'DOMContentLoaded', $intern_52 = 'FD3FBFFC339E398589E4B5D393D2F019', $intern_13 = 'SCRIPT', $intern_10 = '__gwt_marker_modding', $intern_17 = 'base', $intern_4 = 'begin', $intern_3 = 'bootstrap', $intern_19 = 'clear.cache.gif', $intern_23 = 'content', $intern_9 = 'end', $intern_41 = 'gecko', $intern_42 = 'gecko1_8', $intern_5 = 'gwt.codesvr=', $intern_6 = 'gwt.hosted=', $intern_7 = 'gwt.hybrid', $intern_54 = 'gwt/standard/standard.css', $intern_28 = 'gwt:onLoadErrorFn', $intern_25 = 'gwt:onPropertyErrorFn', $intern_22 = 'gwt:property', $intern_59 = 'head', $intern_45 = 'hosted.html?modding', $intern_58 = 'href', $intern_40 = 'ie6', $intern_39 = 'ie8', $intern_30 = 'iframe', $intern_18 = 'img', $intern_31 = "javascript:''", $intern_55 = 'link', $intern_44 = 'loadExternalRefs', $intern_20 = 'meta', $intern_1 = 'modding', $intern_33 = 'moduleRequested', $intern_8 = 'moduleStartup', $intern_38 = 'msie', $intern_21 = 'name', $intern_35 = 'opera', $intern_32 = 'position:absolute;width:0;height:0;border:none', $intern_56 = 'rel', $intern_37 = 'safari', $intern_46 = 'selectingPermutation', $intern_2 = 'startup', $intern_57 = 'stylesheet', $intern_43 = 'unknown', $intern_34 = 'user.agent', $intern_36 = 'webkit';
+  var $intern_0 = '', $intern_29 = '" for "gwt:onLoadErrorFn"', $intern_27 = '" for "gwt:onPropertyErrorFn"', $intern_12 = '"><\/script>', $intern_14 = '#', $intern_57 = '.cache.html', $intern_16 = '/', $intern_51 = '07D8A6448D88CFA522A7210D35236018', $intern_52 = '60317BACF5509A21B663B20C6F81DD01', $intern_53 = '9221CC08F785A3B9EEB8816BF82437EB', $intern_54 = '9FC16016B45C64B88617A47A59803202', $intern_65 = '<script defer="defer">modding.onInjectionDone(\'modding\')<\/script>', $intern_11 = '<script id="', $intern_24 = '=', $intern_15 = '?', $intern_26 = 'Bad handler "', $intern_55 = 'DD12CA5635867F845166FA49EC73692E', $intern_64 = 'DOMContentLoaded', $intern_56 = 'F925E962AB3A2200EA1225B8D605FAAF', $intern_13 = 'SCRIPT', $intern_10 = '__gwt_marker_modding', $intern_36 = 'android', $intern_17 = 'base', $intern_4 = 'begin', $intern_3 = 'bootstrap', $intern_19 = 'clear.cache.gif', $intern_23 = 'content', $intern_9 = 'end', $intern_45 = 'gecko', $intern_46 = 'gecko1_8', $intern_5 = 'gwt.codesvr=', $intern_6 = 'gwt.hosted=', $intern_7 = 'gwt.hybrid', $intern_58 = 'gwt/standard/standard.css', $intern_28 = 'gwt:onLoadErrorFn', $intern_25 = 'gwt:onPropertyErrorFn', $intern_22 = 'gwt:property', $intern_63 = 'head', $intern_49 = 'hosted.html?modding', $intern_62 = 'href', $intern_44 = 'ie6', $intern_43 = 'ie8', $intern_30 = 'iframe', $intern_18 = 'img', $intern_35 = 'iphone', $intern_31 = "javascript:''", $intern_59 = 'link', $intern_48 = 'loadExternalRefs', $intern_20 = 'meta', $intern_1 = 'modding', $intern_33 = 'moduleRequested', $intern_8 = 'moduleStartup', $intern_42 = 'msie', $intern_21 = 'name', $intern_37 = 'nophone', $intern_39 = 'opera', $intern_34 = 'phone.useragent', $intern_32 = 'position:absolute;width:0;height:0;border:none', $intern_60 = 'rel', $intern_41 = 'safari', $intern_50 = 'selectingPermutation', $intern_2 = 'startup', $intern_61 = 'stylesheet', $intern_47 = 'unknown', $intern_38 = 'user.agent', $intern_40 = 'webkit';
   var $wnd = window, $doc = document, $stats = $wnd.__gwtStatsEvent?function(a){
     return $wnd.__gwtStatsEvent(a);
   }
@@ -174,42 +174,54 @@ function modding(){
 
   providers[$intern_34] = function(){
     var ua = navigator.userAgent.toLowerCase();
-    var makeVersion = function(result){
-      return parseInt(result[1]) * 1000 + parseInt(result[2]);
-    }
-    ;
     if (ua.indexOf($intern_35) != -1) {
       return $intern_35;
     }
      else if (ua.indexOf($intern_36) != -1) {
-      return $intern_37;
+      return $intern_36;
     }
-     else if (ua.indexOf($intern_38) != -1) {
+    return $intern_37;
+  }
+  ;
+  values[$intern_34] = {android:0, iphone:1, nophone:2};
+  providers[$intern_38] = function(){
+    var ua = navigator.userAgent.toLowerCase();
+    var makeVersion = function(result){
+      return parseInt(result[1]) * 1000 + parseInt(result[2]);
+    }
+    ;
+    if (ua.indexOf($intern_39) != -1) {
+      return $intern_39;
+    }
+     else if (ua.indexOf($intern_40) != -1) {
+      return $intern_41;
+    }
+     else if (ua.indexOf($intern_42) != -1) {
       if (document.documentMode >= 8) {
-        return $intern_39;
+        return $intern_43;
       }
        else {
         var result = /msie ([0-9]+)\.([0-9]+)/.exec(ua);
         if (result && result.length == 3) {
           var v = makeVersion(result);
           if (v >= 6000) {
-            return $intern_40;
+            return $intern_44;
           }
         }
       }
     }
-     else if (ua.indexOf($intern_41) != -1) {
+     else if (ua.indexOf($intern_45) != -1) {
       var result = /rv:([0-9]+)\.([0-9]+)/.exec(ua);
       if (result && result.length == 3) {
         if (makeVersion(result) >= 1008)
-          return $intern_42;
+          return $intern_46;
       }
-      return $intern_41;
+      return $intern_45;
     }
-    return $intern_43;
+    return $intern_47;
   }
   ;
-  values[$intern_34] = {gecko:0, gecko1_8:1, ie6:2, ie8:3, opera:4, safari:5};
+  values[$intern_38] = {gecko:0, gecko1_8:1, ie6:2, ie8:3, opera:4, safari:5};
   modding.onScriptLoad = function(){
     if (frameInjected) {
       loadDone = true;
@@ -219,7 +231,7 @@ function modding(){
   ;
   modding.onInjectionDone = function(){
     scriptsDone = true;
-    $stats && $stats({moduleName:$intern_1, sessionId:$sessionId, subSystem:$intern_2, evtGroup:$intern_44, millis:(new Date).getTime(), type:$intern_9});
+    $stats && $stats({moduleName:$intern_1, sessionId:$sessionId, subSystem:$intern_2, evtGroup:$intern_48, millis:(new Date).getTime(), type:$intern_9});
     maybeStartModule();
   }
   ;
@@ -231,21 +243,33 @@ function modding(){
       $wnd.location.reload();
       return;
     }
-    initialHtml = $intern_45;
+    initialHtml = $intern_49;
     strongName = $intern_0;
   }
   processMetas();
-  $stats && $stats({moduleName:$intern_1, sessionId:$sessionId, subSystem:$intern_2, evtGroup:$intern_3, millis:(new Date).getTime(), type:$intern_46});
+  $stats && $stats({moduleName:$intern_1, sessionId:$sessionId, subSystem:$intern_2, evtGroup:$intern_3, millis:(new Date).getTime(), type:$intern_50});
   if (!isHostedMode()) {
     try {
-      unflattenKeylistIntoAnswers([$intern_35], $intern_47);
-      unflattenKeylistIntoAnswers([$intern_37], $intern_48);
-      unflattenKeylistIntoAnswers([$intern_42], $intern_49);
-      unflattenKeylistIntoAnswers([$intern_41], $intern_50);
-      unflattenKeylistIntoAnswers([$intern_39], $intern_51);
-      unflattenKeylistIntoAnswers([$intern_40], $intern_52);
-      strongName = answers[computePropValue($intern_34)];
-      initialHtml = strongName + $intern_53;
+      unflattenKeylistIntoAnswers([$intern_36, $intern_41], $intern_51);
+      unflattenKeylistIntoAnswers([$intern_35, $intern_41], $intern_51);
+      unflattenKeylistIntoAnswers([$intern_37, $intern_41], $intern_51);
+      unflattenKeylistIntoAnswers([$intern_36, $intern_46], $intern_52);
+      unflattenKeylistIntoAnswers([$intern_35, $intern_46], $intern_52);
+      unflattenKeylistIntoAnswers([$intern_37, $intern_46], $intern_52);
+      unflattenKeylistIntoAnswers([$intern_36, $intern_45], $intern_53);
+      unflattenKeylistIntoAnswers([$intern_35, $intern_45], $intern_53);
+      unflattenKeylistIntoAnswers([$intern_37, $intern_45], $intern_53);
+      unflattenKeylistIntoAnswers([$intern_36, $intern_43], $intern_54);
+      unflattenKeylistIntoAnswers([$intern_35, $intern_43], $intern_54);
+      unflattenKeylistIntoAnswers([$intern_37, $intern_43], $intern_54);
+      unflattenKeylistIntoAnswers([$intern_36, $intern_39], $intern_55);
+      unflattenKeylistIntoAnswers([$intern_35, $intern_39], $intern_55);
+      unflattenKeylistIntoAnswers([$intern_37, $intern_39], $intern_55);
+      unflattenKeylistIntoAnswers([$intern_36, $intern_44], $intern_56);
+      unflattenKeylistIntoAnswers([$intern_35, $intern_44], $intern_56);
+      unflattenKeylistIntoAnswers([$intern_37, $intern_44], $intern_56);
+      strongName = answers[computePropValue($intern_34)][computePropValue($intern_38)];
+      initialHtml = strongName + $intern_57;
     }
      catch (e) {
       return;
@@ -255,16 +279,16 @@ function modding(){
   function onBodyDone(){
     if (!bodyDone) {
       bodyDone = true;
-      if (!__gwt_stylesLoaded[$intern_54]) {
-        var l = $doc.createElement($intern_55);
-        __gwt_stylesLoaded[$intern_54] = l;
-        l.setAttribute($intern_56, $intern_57);
-        l.setAttribute($intern_58, base + $intern_54);
-        $doc.getElementsByTagName($intern_59)[0].appendChild(l);
+      if (!__gwt_stylesLoaded[$intern_58]) {
+        var l = $doc.createElement($intern_59);
+        __gwt_stylesLoaded[$intern_58] = l;
+        l.setAttribute($intern_60, $intern_61);
+        l.setAttribute($intern_62, base + $intern_58);
+        $doc.getElementsByTagName($intern_63)[0].appendChild(l);
       }
       maybeStartModule();
       if ($doc.removeEventListener) {
-        $doc.removeEventListener($intern_60, onBodyDone, false);
+        $doc.removeEventListener($intern_64, onBodyDone, false);
       }
       if (onBodyDoneTimerId) {
         clearInterval(onBodyDoneTimerId);
@@ -273,7 +297,7 @@ function modding(){
   }
 
   if ($doc.addEventListener) {
-    $doc.addEventListener($intern_60, function(){
+    $doc.addEventListener($intern_64, function(){
       maybeInjectFrame();
       onBodyDone();
     }
@@ -287,8 +311,8 @@ function modding(){
   }
   , 50);
   $stats && $stats({moduleName:$intern_1, sessionId:$sessionId, subSystem:$intern_2, evtGroup:$intern_3, millis:(new Date).getTime(), type:$intern_9});
-  $stats && $stats({moduleName:$intern_1, sessionId:$sessionId, subSystem:$intern_2, evtGroup:$intern_44, millis:(new Date).getTime(), type:$intern_4});
-  $doc.write($intern_61);
+  $stats && $stats({moduleName:$intern_1, sessionId:$sessionId, subSystem:$intern_2, evtGroup:$intern_48, millis:(new Date).getTime(), type:$intern_4});
+  $doc.write($intern_65);
 }
 
 modding();

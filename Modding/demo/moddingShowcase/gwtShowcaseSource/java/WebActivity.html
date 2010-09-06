@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * @author desaintsteban.p
+ * This Activity load a web page and display it
  * 
  */
 public class WebActivity extends Activity implements RequestCallback {
@@ -56,11 +56,15 @@ public class WebActivity extends Activity implements RequestCallback {
         return "web-activity";
     }
 
+    /**
+     * Load the url
+     * @param url
+     */
     protected void loadURL(String url) {
-        requestSourceContents(url, content, this);
+        requestWebContents(url, content, this);
     }
 
-    private void requestSourceContents(String url, final HTML target, final RequestCallback callback) {
+    private void requestWebContents(String url, final HTML target, final RequestCallback callback) {
         target.setDirection(HasDirection.Direction.LTR);
         DOM.setStyleAttribute(target.getElement(), "textAlign", "left");
         target.setText("");
@@ -94,11 +98,17 @@ public class WebActivity extends Activity implements RequestCallback {
         }
     }
 
+    /**
+     * If there are an error
+     */
     @Override
     public void onError(Request request, Throwable exception) {
         
     }
 
+    /**
+     * When the page is loaded
+     */
     @Override
     public void onResponseReceived(Request request, Response response) {
         

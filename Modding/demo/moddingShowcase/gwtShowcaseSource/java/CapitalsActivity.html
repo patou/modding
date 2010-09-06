@@ -5,9 +5,10 @@ import com.sfeir.modding.client.app.LazyListActivity;
 import com.sfeir.modding.client.component.menu.MenuBar;
 import com.sfeir.modding.client.component.menu.MenuItem;
 import com.sfeir.modding.client.content.Intent;
+import com.sfeir.modding.client.content.ModdingActivityAction;
 import com.sfeir.modding.client.showcase.ShowcaseAnnotations.ShowcaseSource;
 import com.sfeir.modding.client.showcase.data.Static;
-import com.sfeir.modding.client.view.adapter.ListAdapter;
+import com.sfeir.modding.client.view.adapter.ListStringAdapter;
 
 /**
  * Display a Capital List
@@ -15,10 +16,11 @@ import com.sfeir.modding.client.view.adapter.ListAdapter;
  *
  */
 @ShowcaseSource
+@ModdingActivityAction("capitals")
 public class CapitalsActivity extends LazyListActivity {
 
     public CapitalsActivity() {
-        ListAdapter listAdapter = new ListAdapter(Static.getCapitalsList());
+        ListStringAdapter listAdapter = new ListStringAdapter(Static.getCapitalsList());
         setListAdapter(listAdapter);
     }
 
@@ -33,7 +35,7 @@ public class CapitalsActivity extends LazyListActivity {
         MenuItem menuItem2 = new MenuItem("Countries", new Command() {
             @Override
             public void execute() {
-               startActivity(new Intent(new CountriesActivity()));
+               startActivity(new Intent(CountriesActivity.class));
             }
         });
 

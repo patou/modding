@@ -6,9 +6,10 @@ import com.sfeir.modding.client.app.ListActivity;
 import com.sfeir.modding.client.component.menu.MenuBar;
 import com.sfeir.modding.client.component.menu.MenuItem;
 import com.sfeir.modding.client.content.Intent;
+import com.sfeir.modding.client.content.ModdingActivityAction;
 import com.sfeir.modding.client.showcase.ShowcaseAnnotations.ShowcaseSource;
 import com.sfeir.modding.client.showcase.data.Static;
-import com.sfeir.modding.client.view.adapter.ListAdapter;
+import com.sfeir.modding.client.view.adapter.ListStringAdapter;
 import com.sfeir.modding.client.view.event.ListItemClickEvent;
 
 /**
@@ -17,12 +18,13 @@ import com.sfeir.modding.client.view.event.ListItemClickEvent;
  *
  */
 @ShowcaseSource
+@ModdingActivityAction("countries")
 public class CountriesActivity extends ListActivity {
 
     public static int instance = 1;
 
     public CountriesActivity() {
-        ListAdapter listAdapter = new ListAdapter(Static.getCountriesList());
+        ListStringAdapter listAdapter = new ListStringAdapter(Static.getCountriesList());
         setListAdapter(listAdapter);
         instance++;
     }
@@ -53,7 +55,8 @@ public class CountriesActivity extends ListActivity {
                 
                 @Override
                 public void execute() {
-                    startActivity(new Intent(new HomeActivity()));
+                    Intent intent = new Intent(HomeActivity.class);
+					startActivity(intent);
                 }
             });
         }
@@ -62,7 +65,10 @@ public class CountriesActivity extends ListActivity {
             
             @Override
             public void execute() {
-                startActivity(new Intent(new CapitalsActivity()));
+            	Intent intent = new Intent(CapitalsActivity.class);
+                intent.putExtra("instance", instance);
+                intent.putExtra("name", getName());
+				startActivity(intent);
             }
         });
         menu.addItem(menuItem);

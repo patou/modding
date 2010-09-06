@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitHandler;
+import com.google.gwt.user.client.ui.Widget;
 import com.sfeir.modding.client.component.forms.LabelForm;
 import com.sfeir.modding.client.component.forms.base.LabelComponentBase;
-import com.sfeir.modding.client.component.menu.MenuBar;
 import com.sfeir.modding.client.component.menu.MenuItem;
 
 /**
@@ -21,19 +24,24 @@ import com.sfeir.modding.client.component.menu.MenuItem;
  */
 public abstract class FormActivity extends Activity implements SubmitHandler {
 
-    private LabelForm form = new LabelForm();
+    @UiField
+    public LabelForm form;
     private List&lt;MenuItem&gt; listButton = new ArrayList&lt;MenuItem&gt;(1);
+    
+    private static FormViewUiBinder uiBinder = GWT.create(FormViewUiBinder.class);
+    public interface FormViewUiBinder extends UiBinder&lt;Widget, FormActivity&gt; {}
 
     /**
      * 
      */
-    public FormActivity() {
-        setContentView(getForm());
-        getForm().addSubmitHandler(this);
+    protected FormActivity() {
+        setContentView(uiBinder.createAndBindUi(this));
         onCreateForm();
     }
     
-    public abstract void onCreateForm();
+    protected void onCreateForm() {
+        
+    }
 
     /*
      * (non-Javadoc)
@@ -42,7 +50,7 @@ public abstract class FormActivity extends Activity implements SubmitHandler {
      */
     @Override
     public void displayData() {
-
+        getForm().addSubmitHandler(this);
     }
 
     /*
@@ -73,7 +81,7 @@ public abstract class FormActivity extends Activity implements SubmitHandler {
      * @param text
      *            Texte du bouton
      */
-    public void addSubmitButton(String text) {
+    protected void addSubmitButton(String text) {
         addSubmitButton(new MenuItem(text));
     }
 
@@ -83,7 +91,7 @@ public abstract class FormActivity extends Activity implements SubmitHandler {
      * @param button
      *            bouton à ajouter
      */
-    public void addSubmitButton(MenuItem button) {
+    protected void addSubmitButton(MenuItem button) {
         listButton.add(button);
         button.setCommand(new Command() {
 
@@ -101,7 +109,7 @@ public abstract class FormActivity extends Activity implements SubmitHandler {
      * @param text
      *            Texte du bouton
      */
-    public void addResetButton(String text) {
+    protected void addResetButton(String text) {
         addResetButton(new MenuItem(text));
     }
 
@@ -111,7 +119,7 @@ public abstract class FormActivity extends Activity implements SubmitHandler {
      * @param button
      *            bouton à ajouter
      */
-    public void addResetButton(MenuItem button) {
+    protected void addResetButton(MenuItem button) {
         listButton.add(button);
         button.setCommand(new Command() {
 
@@ -129,7 +137,7 @@ public abstract class FormActivity extends Activity implements SubmitHandler {
      * @param text
      *            Texte du bouton
      */
-    public void addValidateButton(String text) {
+    protected void addValidateButton(String text) {
         addValidateButton(new MenuItem(text));
     }
 
@@ -139,7 +147,7 @@ public abstract class FormActivity extends Activity implements SubmitHandler {
      * @param button
      *            bouton à ajouter
      */
-    public void addValidateButton(MenuItem button) {
+    protected void addValidateButton(MenuItem button) {
         listButton.add(button);
         button.setCommand(new Command() {
 
@@ -157,26 +165,26 @@ public abstract class FormActivity extends Activity implements SubmitHandler {
      * @param text
      *            Texte du bouton
      */
-    public void addButton(String text) {
+    protected void addButton(String text) {
         addValidateButton(new MenuItem(text));
     }
 
-    @Override
-    protected boolean onCreateOptionsMenu(MenuBar menu) {
-        for (MenuItem button : listButton) {
-            menu.addItem(button);
-        }
-        return true;
-    }
-    
     /**
      * Ajoute un bouton sans action spécifique
      * 
      * @param button
      *            bouton à ajouter
      */
-    public void addButton(MenuItem button) {
+    protected void addButton(MenuItem button) {
         listButton.add(button);
+    }
+    
+    protected void submit() {
+        getForm().submit();
+    }
+    
+    protected void validate() {
+        getForm().validate();
     }
 
     protected LabelForm getForm() {

@@ -7,10 +7,57 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.sfeir.modding.client.view.ListItemView;
 import com.sfeir.modding.client.view.adapter.BaseAdapter;
+import com.sfeir.modding.client.view.adapter.event.BaseAdapterChangeEvent;
+import com.sfeir.modding.client.view.adapter.event.BaseAdapterChangeHandler;
 import com.sfeir.modding.client.view.event.ListItemClickEvent;
 import com.sfeir.modding.client.view.event.ListItemClickHandler;
 
-public class ListActivity extends Activity implements ListItemClickHandler {
+/**
+ * Default activity in a list
+ * Must add a list Adapter that implement the BaseAdapter interface
+ * (the AbstractAdapter, implement a default list adapter)
+ * 
+ * &lt;code&gt;
+ * class MyListActivity extend ListActivity {
+ * 	public MyListActivity() {
+ * 		setListActivity(new AbstractAdapter&lt;String&gt;());
+ * 	}
+ * }
+ * &lt;/code&gt;
+ * 
+ * 
+ * If you want to extend the ListActivity and implement a new ContentView, 
+ * the new contentView must have FlowPanel with a list
+ * 
+ * &lt;code&gt;
+ * class MyListActivity extend ListActivity {
+ * 	private static MyListViewUiBinder uiBinder = GWT.create(MyListViewUiBinder.class);
+ *  interface MyListViewUiBinder extends UiBinder&lt;Widget, MyListActivity&gt; {}
+ * 	public MyListActivity() {
+ * 		setContentView(uiBinder.createAndBindUi(this));
+ * 	}
+ * }
+ * &lt;/code&gt;
+ * 
+ * and the MyListActivity.ui.xml
+ * &lt;code&gt;
+ * &lt;!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent"&gt;
+ * &lt;ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+ *  xmlns:g="urn:import:com.google.gwt.user.client.ui"&gt;
+ * &lt;ui:style&gt;
+ *   .listView {
+ *  	background: transparent;
+ *     height: 100%;
+ *     width: 100%;
+ *   }
+ *  &lt;/ui:style&gt;
+ *  
+ *  &lt;g:FlowPanel ui:field="listView" styleName="{style.listView}"&gt;
+ *  &lt;/g:FlowPanel&gt;
+ * &lt;/ui:UiBinder&gt; 
+ * &lt;/code&gt;
+ */
+public class ListActivity extends Activity implements ListItemClickHandler, BaseAdapterChangeHandler {
 
     private static ListViewUiBinder uiBinder = GWT.create(ListViewUiBinder.class);
     interface ListViewUiBinder extends UiBinder&lt;Widget, ListActivity&gt; {}
@@ -26,51 +73,121 @@ public class ListActivity extends Activity implements ListItemClickHandler {
         getElement().setId("listActivity");
     }
 
+    /**
+     * Override this method to handler on click on the item of a list
+     * @param view
+     */
     protected void onListItemClick(ListItemView view) {
     }
 
+    /**
+     * Set the adapter of the list,
+     * @param baseAdapter
+     */
     protected void setListAdapter(BaseAdapter&lt;?&gt; baseAdapter) {
         this.baseAdapter = baseAdapter;
+        baseAdapter.addBaseAdapterChangeHandler(this);
+    }
+    
+    /**
+     * Get the list Adapter
+     * @return
+     */
+    protected BaseAdapter&lt;?&gt; getListAdapter() {
+    	return this.baseAdapter;
+    }
+    
+    /**
+     * Get the list adapter and cast it in the given type
+     * @param &lt;T&gt;
+     * @param listType
+     * @return
+     */
+	@SuppressWarnings("unchecked")
+	protected &lt;T extends BaseAdapter&lt;?&gt;&gt; T getListAdapter(Class&lt;T&gt; listType) {
+    	if (this.baseAdapter != null) {
+    		return (T) this.baseAdapter;
+    	}
+    	return null;
     }
 
+    /**
+     * Clear the list
+     */
     protected void clear() {
         listView.clear();
     }
 
+    /**
+     * Automatically display data of the list
+     */
     @Override
     public void displayData() {
         if(baseAdapter == null)
                return;
-        for(int i=0; i&lt;baseAdapter.size(); i++) {
+        displayList();
+    }
+
+    /**
+     * Display the list
+     */
+	protected void displayList() {
+		clear();
+        for(int i=0; i &lt; baseAdapter.size(); i++) {
             final ListItemView view = baseAdapter.getView(i);
             add(view);
         }
-    }
+	}
 
+	/**
+	 * Add a new ListItem
+	 * @param view
+	 */
     protected void add(final ListItemView view) {
         listView.add(view);
         view.setItemPostion(listView.getWidgetIndex(view));
         view.addListItemClickHandler(this);
-
     }
     
+    /**
+     * Remove a list item
+     * @param view
+     */
     protected void remove(final ListItemView view) {
         listView.remove(view);
     }
 
+    /**
+     * Get the item of the position
+     * @param position
+     * @return
+     */
     public ListItemView getItem(int position) {
         return (ListItemView) listView.getWidget(position);
     }
-
 
     @Override
     public void onListItemClick(ListItemClickEvent event) {
         selectedItemPosition = event.getItemPosition();
     }
 
+    /**
+     * Get the selected item position
+     * @return
+     */
     public int getSelectedItemPosition() {
         return selectedItemPosition;
     }
+    
+    /**
+     * Handler on the change of the BaseAdapter
+     * Display the new list
+     */
+    @Override
+	public void onChange(BaseAdapterChangeEvent event) {
+		displayList();
+	}
+    
     @Override
     public String getName() {
         return "list-activity";

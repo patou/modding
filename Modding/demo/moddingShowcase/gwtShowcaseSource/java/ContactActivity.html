@@ -2,39 +2,36 @@
 
 import java.util.Map;
 
-import com.google.gwt.user.client.Command;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
+import com.google.gwt.user.client.ui.Widget;
 import com.sfeir.modding.client.app.FormActivity;
-import com.sfeir.modding.client.component.forms.LabelTextArea;
-import com.sfeir.modding.client.component.forms.LabelTextBox;
-import com.sfeir.modding.client.component.menu.MenuItem;
-import com.sfeir.modding.client.component.validator.RegexValidator;
+import com.sfeir.modding.client.content.ModdingActivityAction;
 
+@ModdingActivityAction("contact")
 public class ContactActivity extends FormActivity {
+    private static ContactViewUiBinder uiBinder = GWT.create(ContactViewUiBinder.class);
+    @UiTemplate("ContactActivity.ui.xml")
+    public interface ContactViewUiBinder extends UiBinder&lt;Widget,ContactActivity&gt; {}
+    
     public ContactActivity() {
-        
-    }
-
-    @Override
-    public void onCreateForm() {
-        LabelTextBox elementName = new LabelTextBox("Your name", true);
-        elementName.setName("name");
-        addElement(elementName);
-        LabelTextBox elementEmail = new LabelTextBox("Your email", true);
-        elementEmail.addValidator(new RegexValidator("^([a-z0-9_.-]+)@([a-z0-9_.-]+)$","Please enter a correct email"));
-        addElement(elementEmail);
-        addElement(new LabelTextArea("Comment", true));
-        addButton(new MenuItem("Cancel", new Command() {
-            
-            @Override
-            public void execute() {
-                finish();
-            }
-        }));
-        addSubmitButton("Send");
+        setContentView(uiBinder.createAndBindUi(this));
     }
     
+    @UiField Button submit;
+    
+    @UiHandler({"submit"})
+    void onSumitButtonClick(ClickEvent event) {
+        submit();
+    }
+ 
     @Override
     public void onSubmit(SubmitEvent event) {
         Map&lt;String,Object&gt; values = getValues();

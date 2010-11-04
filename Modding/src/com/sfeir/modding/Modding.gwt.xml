@@ -2,6 +2,8 @@
 <module rename-to='modding'>
 
   <inherits name='com.google.gwt.user.User'/>
+  <inherits name='com.google.gwt.mobile.Mobile'/>
+  <inherits name='com.sfeir.modding.tools.PhoneUserAgent'/>
   <inherits name='com.google.gwt.user.theme.standard.Standard'/>
 
   <source path='client'/>
@@ -9,5 +11,5 @@
   <generate-with class="com.sfeir.modding.generator.ModdingGenerator">
   	<when-type-assignable
    		class="com.sfeir.modding.client.app.ActivityFactory" />
- </generate-with>
+  </generate-with>
 </module>

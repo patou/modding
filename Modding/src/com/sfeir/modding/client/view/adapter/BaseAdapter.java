@@ -1,37 +1,44 @@
 package com.sfeir.modding.client.view.adapter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.sfeir.modding.client.view.ListItemView;
+import com.sfeir.modding.client.view.adapter.event.HasBaseAdapterChangeHandlers;
 
-public abstract class BaseAdapter<V> {
+public interface BaseAdapter<V> extends HasBaseAdapterChangeHandlers, Iterable<V> {
 
-    private ArrayList<V> values;
+	public abstract ListItemView getView(int itemPosition);
 
-    protected BaseAdapter() {
-        this.values = new ArrayList<V>();
-    }
+	public abstract ListItemView getView(V item);
 
-    protected BaseAdapter(ArrayList<V> values) {
-        this.values = new ArrayList<V>(values);
-    }
+	public abstract void setValues(List<V> values);
 
-    public abstract ListItemView getView(int itemPosition);
+	public abstract void addValue(V value);
 
-    public void setValues(ArrayList<V> values) {
-        this.values.clear();
-        this.values.addAll(values);
-    }
+	public abstract void insertValue(int index, V value);
 
-    public ArrayList<V> getValues() {
-        return values;
-    }
-    
-    public V getItem(int index) {
-        return values.get(index);
-    }
-    
-    public int size() {
-        return values.size();
-    }
+	public abstract void addValues(List<V> values);
+
+	public abstract void addValues(int index, List<V> values);
+
+	public abstract void removeValue(int index);
+
+	public abstract void removeValue(V item);
+
+	public abstract void clear();
+
+	public abstract List<V> getValues();
+
+	/**
+	 * Return an specific item
+	 * @param index
+	 * @return The Item or Null
+	 */
+	public abstract V getItem(int index);
+
+	/**
+	 * 
+	 * @return The size of the list
+	 */
+	public abstract int size();
 }

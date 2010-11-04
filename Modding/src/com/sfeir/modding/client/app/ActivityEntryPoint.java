@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -34,9 +35,9 @@ public class ActivityEntryPoint implements EntryPoint, UncaughtExceptionHandler,
     @Override
     public void onModuleLoad() {
         init();
-        History.addValueChangeHandler(this);
         manager.addActivityChangeHandler(this);
-        startHome();
+        startHome(History.getToken());
+        History.addValueChangeHandler(this);
         addRootPanel(manager);
     }
 
@@ -50,10 +51,27 @@ public class ActivityEntryPoint implements EntryPoint, UncaughtExceptionHandler,
         RootPanel.get().add(widget);
     }
 
-    private void startHome() {
-        homeIntent = getHomeIntent();
-        if (homeIntent != null) {
+    /**
+     * Start the home page
+     * @param url
+     */
+    
+    private void startHome(String url) {
+    	GWT.log(url);
+    	if (url != null && !url.isEmpty()) {
+    		if (url.startsWith("!")) {
+    			url = url.substring(1);
+    		}
+    		homeIntent = new Intent(url);
+    	}
+		if (homeIntent == null) {
+			homeIntent = getHomeIntent();
+		}
+    	if (homeIntent != null) {
             manager.startActivity(homeIntent);
+        }
+        else {
+        	Window.alert("There are no Home Activity, you must add the @ModdingAction(defaultActivity = true, value = \"home\") on a Activity or implement the getHomeIntent() method in the ActivityEntryPoint sub class");
         }
     }
     
@@ -90,36 +108,43 @@ public class ActivityEntryPoint implements EntryPoint, UncaughtExceptionHandler,
     @Override
     public void onValueChange(ValueChangeEvent<String> event) {
         String name = event.getValue();
-        if (name == null || name == "") {
-            startHome();
-        }
-        else {
+        if (name != null && !name.isEmpty()) {
+        	name = name.substring(1);
             if (intents.containsKey(name)) {
                 Intent intent = intents.get(name);
                 if (intent != null) {
                     Intent lastIntent = manager.getLastActivity();
                     while (!manager.isHome() && !intent.equals(lastIntent)) {
-                        intents.remove(lastIntent);
+                        intents.remove(lastIntent.getUrl());
                         manager.back();
                         lastIntent = manager.getLastActivity();
                     }
                     manager.startActivity(intent);
+                    return;
                 }
             }
+            else {
+            	startHome(name);
+            	return;
+            }
         }
+        startHome(null);
     }
 
     /**
-     * Called when a new activity is lauched
+     * Called when a new activity is launched
+     * Add the Intent to the intent hash map
+     * Add to history hash the intent url only if the activity isn't the first activity 
      */
     @Override
     public void onActivityChange(ActivityChangeEvent event) {
         Intent intent = event.getIntent();
-        String name = intent.getHash();
-            //intent.getHash() + intent.toString();
+        String name = intent.getUrl();
         if (!intents.containsKey(name)){
             intents.put(name, intent);
-            History.newItem(name, false);
+            if (!manager.isHome()) {
+            	History.newItem("!" + name, false);
+            }
         }
-    }  
+    }
 }

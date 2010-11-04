@@ -7,6 +7,8 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.sfeir.modding.client.view.ListItemView;
 import com.sfeir.modding.client.view.adapter.BaseAdapter;
+import com.sfeir.modding.client.view.adapter.event.BaseAdapterChangeEvent;
+import com.sfeir.modding.client.view.adapter.event.BaseAdapterChangeHandler;
 import com.sfeir.modding.client.view.event.ListItemClickEvent;
 import com.sfeir.modding.client.view.event.ListItemClickHandler;
 
@@ -15,7 +17,7 @@ import com.sfeir.modding.client.view.event.ListItemClickHandler;
  * 
  *
  */
-public class ListActivity extends Activity implements ListItemClickHandler {
+public class ListActivity extends Activity implements ListItemClickHandler, BaseAdapterChangeHandler {
 
     private static ListViewUiBinder uiBinder = GWT.create(ListViewUiBinder.class);
     interface ListViewUiBinder extends UiBinder<Widget, ListActivity> {}
@@ -36,6 +38,11 @@ public class ListActivity extends Activity implements ListItemClickHandler {
 
     protected void setListAdapter(BaseAdapter<?> baseAdapter) {
         this.baseAdapter = baseAdapter;
+        baseAdapter.addBaseAdapterChangeHandler(this);
+    }
+    
+    protected BaseAdapter<?> getListAdapter() {
+    	return this.baseAdapter;
     }
 
     protected void clear() {
@@ -47,7 +54,7 @@ public class ListActivity extends Activity implements ListItemClickHandler {
         if(baseAdapter == null)
                return;
         clear();
-        for(int i=0; i<baseAdapter.size(); i++) {
+        for(int i=0; i < baseAdapter.size(); i++) {
             final ListItemView view = baseAdapter.getView(i);
             add(view);
         }
@@ -57,7 +64,6 @@ public class ListActivity extends Activity implements ListItemClickHandler {
         listView.add(view);
         view.setItemPostion(listView.getWidgetIndex(view));
         view.addListItemClickHandler(this);
-
     }
     
     protected void remove(final ListItemView view) {
@@ -68,7 +74,6 @@ public class ListActivity extends Activity implements ListItemClickHandler {
         return (ListItemView) listView.getWidget(position);
     }
 
-
     @Override
     public void onListItemClick(ListItemClickEvent event) {
         selectedItemPosition = event.getItemPosition();
@@ -77,6 +82,12 @@ public class ListActivity extends Activity implements ListItemClickHandler {
     public int getSelectedItemPosition() {
         return selectedItemPosition;
     }
+    
+    @Override
+	public void onChange(BaseAdapterChangeEvent event) {
+		displayData();
+	}
+    
     @Override
     public String getName() {
         return "list-activity";

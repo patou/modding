@@ -8,10 +8,9 @@ import com.google.gwt.user.client.ui.Widget;
 import com.sfeir.modding.client.app.ListActivity;
 import com.sfeir.modding.client.app.WebActivity;
 import com.sfeir.modding.client.component.menu.MenuBar;
-import com.sfeir.modding.client.component.menu.MenuItem;
 import com.sfeir.modding.client.content.Intent;
 import com.sfeir.modding.client.content.ModdingAction;
-import com.sfeir.modding.client.view.adapter.ListAdapter;
+import com.sfeir.modding.client.view.adapter.ListStringAdapter;
 import com.sfeir.modding.client.view.event.ListItemClickEvent;
 
 @ModdingAction(value="home",defaultActivity=true)
@@ -31,7 +30,7 @@ public class HomeActivity extends ListActivity {
         home.add("Contacts");
         home.add("Website");
 
-        ListAdapter listAdapter = new ListAdapter(home);
+        ListStringAdapter listAdapter = new ListStringAdapter(home);
         setListAdapter(listAdapter);
     }
 
@@ -39,16 +38,16 @@ public class HomeActivity extends ListActivity {
     public void onListItemClick(ListItemClickEvent event) {
         switch (event.getItemPosition()) {
         case 0:
-            startActivity(new Intent(new CountriesActivity()));
+            startActivity(new Intent(CountriesActivity.class));
             break;
         case 1:
-            startActivity(new Intent(new CapitalsActivity()));
+            startActivity(new Intent(CapitalsActivity.class));
             break;
         case 2:
-            startActivity(new Intent(new ContactActivity()));
+            startActivity(new Intent(ContactActivity.class));
             break;
         case 3:
-            Intent intentURL = new Intent(new WebActivity());
+            Intent intentURL = new Intent(WebActivity.class);
             intentURL.putExtra("url", "page.html");
             startActivity(intentURL);
             break;

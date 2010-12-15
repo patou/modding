@@ -7,7 +7,7 @@ import com.sfeir.modding.client.component.menu.MenuItem;
 import com.sfeir.modding.client.content.Intent;
 import com.sfeir.modding.client.showcase.ShowcaseAnnotations.ShowcaseSource;
 import com.sfeir.modding.client.showcase.data.Static;
-import com.sfeir.modding.client.view.adapter.ListAdapter;
+import com.sfeir.modding.client.view.adapter.ListStringAdapter;
 
 /**
  * Display a Capital List
@@ -18,7 +18,7 @@ import com.sfeir.modding.client.view.adapter.ListAdapter;
 public class CapitalsActivity extends LazyListActivity {
 
     public CapitalsActivity() {
-        ListAdapter listAdapter = new ListAdapter(Static.getCapitalsList());
+    	ListStringAdapter listAdapter = new ListStringAdapter(Static.getCapitalsList());
         setListAdapter(listAdapter);
     }
 

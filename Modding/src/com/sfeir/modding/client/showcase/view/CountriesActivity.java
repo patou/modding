@@ -9,7 +9,7 @@ import com.sfeir.modding.client.content.Intent;
 import com.sfeir.modding.client.content.ModdingAction;
 import com.sfeir.modding.client.showcase.ShowcaseAnnotations.ShowcaseSource;
 import com.sfeir.modding.client.showcase.data.Static;
-import com.sfeir.modding.client.view.adapter.ListAdapter;
+import com.sfeir.modding.client.view.adapter.ListStringAdapter;
 import com.sfeir.modding.client.view.event.ListItemClickEvent;
 
 /**
@@ -24,7 +24,7 @@ public class CountriesActivity extends ListActivity {
     public static int instance = 1;
 
     public CountriesActivity() {
-        ListAdapter listAdapter = new ListAdapter(Static.getCountriesList());
+    	ListStringAdapter listAdapter = new ListStringAdapter(Static.getCountriesList());
         setListAdapter(listAdapter);
         instance++;
     }

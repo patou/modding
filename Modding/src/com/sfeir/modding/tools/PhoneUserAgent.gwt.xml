@@ -3,16 +3,37 @@
 <module>
 
   <!-- Browser-sensitive code should use the 'user.agent' property -->
-  <define-property name="phone.useragent" values="iphone,android,nophone"/>
+ <define-property name="phone.useragent"
+		values="iphone,android,firefox_mobile,skyfire,opera_mobile,nophone" />
 
-  <property-provider name="phone.useragent"><![CDATA[
+	<property-provider name="phone.useragent"><![CDATA[
+      var args = location.search;
+      var startUA = args.indexOf("phone.useragent=");
+      if (startUA >= 0) {
+          var phoneUA = args.substring(startUA);
+          var begin = phoneUA.indexOf("=") + 1;
+          var end = phoneUA.indexOf("&");
+          if (end == -1) {
+            end = phoneUA.length;
+          }
+          var useragent = phoneUA.substring(begin, end);
+          if (__gwt_isKnownPropertyValue("phone.useragent",  useragent)) {
+          	return useragent;
+          }
+      }
       var ua = navigator.userAgent.toLowerCase();
       if (ua.indexOf("iphone") != -1) {
         return "iphone";
       } else if (ua.indexOf("android") != -1) {
         return "android";
+      } else if (ua.indexof("fennec") != -1) {
+      	return "firefox_mobile";
+      } else if (ua.indexof("skyfire") != -1) {
+      	return "skyfire";
+      } else if (ua.indexof("opera mobi") != -1) {
+      	return "opera_mobile";
       }
       return "nophone";
-  ]]></property-provider>
+  	]]></property-provider>
 
 </module>
